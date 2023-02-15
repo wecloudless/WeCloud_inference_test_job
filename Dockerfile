@@ -5,5 +5,5 @@ WORKDIR /app
 ADD . /app/
 RUN pip install -r requirements.txt
 
-EXPOSE 5000
+EXPOSE 12344
 CMD ["python", "/app/httpserver-classify.py"]
