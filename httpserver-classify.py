@@ -7,7 +7,7 @@ import urllib.request
 import io,shutil
 import re
 
-from classify_demo import classify_demo
+# from classify_demo import classify_demo
 
 class HTTPServerHandler(BaseHTTPRequestHandler):
     def handler(self):
