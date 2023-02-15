@@ -15,25 +15,13 @@ class HTTPServerHandler(BaseHTTPRequestHandler):
         self.wfile.write(self.rfile.readline())
 
     def do_GET(self):        # get
-        self.send_error(404, "Page not Found!")
-        return
-        # print(self.requestline)
-        # if self.path != '/hello':
-        #     self.send_error(404, "Page not Found!")
-        #     return
-
-        # data = {
-        #     'result_code': '1',
-        #     'result_desc': 'Success',
-        #     'timestamp': '',
-        #     'data': {
-        #         'message_id': '25d55ad283aa400af464c76d713c07ad'
-        #     }
-        # }
-        # self.send_response(200)
-        # self.send_header('Content-type', 'application/json')
-        # self.end_headers()
-        # self.wfile.write(json.dumps(data).encode())
+        # self.send_error(404, "Page not Found!")
+        # return
+        data = {"msg": "hello wecloud!"}
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
+        self.wfile.write(json.dumps(data).encode())
 
     def do_POST(self):         # post
         req_data = self.rfile.read(int(self.headers['content-length'])) 
@@ -61,9 +49,9 @@ class HTTPServerHandler(BaseHTTPRequestHandler):
 
 if __name__ == '__main__':
     try:
-        server = HTTPServer(('127.0.0.1', 12344), HTTPServerHandler)
-        print("Starting server, listen at: 12344")
-        # server.serve_forever()
-    except:
-        pass
+        server = HTTPServer(('127.0.0.1', 5000), HTTPServerHandler)
+        print("Starting server, listen at: 5000")
+        server.serve_forever()
+    except Exception as e:
+        print(e)
     print("test for example")
