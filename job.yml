@@ -1,0 +1,26 @@
+# job.yaml
+orch_type: inference
+
+# 压缩文件在被上传后会被解压到~/sky_workdir/{orch_id}/文件夹下
+# 工作目录workdir为相对于~/sky_workdir/{orch_id}/的路径
+workdir: .
+
+# setup命令
+# 将在workdir下被调用
+setup: |
+  pip3 install -r requirements.txt
+
+# 任务运行命令
+# 将在workdir下被调用
+run: |
+  python3 httpserver-classify.py
+
+# profile命令，注意对于不同类型的编排（training，inference），该命令的调用逻辑不同
+# 对于training任务，直接调用一次该命令为一次profile
+# 对于inference任务，应先运行run命令（即先启动服务），随后每调用一次该命令为一次profile
+# 由于部署之前不知道部署服务的ip，因此若要用到ip，可以使用{$ip}代替，WeCloud会自动替换为当前实例的ip。
+profile: |
+  ./trigger_service.sh
+
+
+orch_desc: {"model": "vgg16"}
