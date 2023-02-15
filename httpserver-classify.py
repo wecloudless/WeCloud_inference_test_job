@@ -49,7 +49,7 @@ class HTTPServerHandler(BaseHTTPRequestHandler):
 
 if __name__ == '__main__':
     try:
-        server = HTTPServer(('127.0.0.1', 5000), HTTPServerHandler)
+        server = HTTPServer(('0.0.0.0', 5000), HTTPServerHandler)
         print("Starting server, listen at: 5000")
         server.serve_forever()
     except Exception as e:
